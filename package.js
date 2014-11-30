@@ -4,7 +4,7 @@ Package.describe({
 
 Package.on_use(function (api, where) {
   api.versionsFrom("METEOR@0.9.0");
-  api.use('meteorhacks:meteorx@1.2.0');
-  api.add_files(['lib/server/firewall.js', 'lib/server/config.js'], 'server');
+  api.use(['meteorhacks:meteorx@1.2.0', 'underscore']);
+  api.add_files(['lib/server/config.js', 'lib/server/stats.js', 'lib/server/firewall.js'], 'server');
   api.export('FireWall', 'server')
 });
