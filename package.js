@@ -11,5 +11,9 @@ Package.on_use(function (api, where) {
     'lib/server/logic.js'
   ], 'server');
 
+  api.add_files([
+    'lib/server/captcha_page.html'
+  ], 'server', {isAsset: true});
+
   api.export('FireWall', 'server')
 });
