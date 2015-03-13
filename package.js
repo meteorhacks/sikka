@@ -11,23 +11,26 @@ Npm.depends({
 Package.on_use(function (api, where) {
   api.versionsFrom("METEOR@0.9.0");
   api.use([
+    'mongo',
     'underscore',
     'meteorhacks:meteorx@1.3.1',
     'chuangbo:cookie@1.1.0'
   ]);
 
   api.add_files([
+    'lib/server/config.js',
     'lib/server/core.js',
-    'lib/server/logic.js'
+    'lib/server/session_hooks.js',
+    'lib/server/proxy_hooks.js'
   ], 'server');
 
   api.add_files([
-    'lib/client/token.js'
+    'lib/client/core.js'
   ], 'client');
 
   api.add_files([
     'lib/server/captcha_page.html'
   ], 'server', {isAsset: true});
 
-  api.export('FireWall', 'server')
+  api.export('Firewall', 'server')
 });

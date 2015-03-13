@@ -4,8 +4,8 @@
     <title>reCAPTCHA demo: Explicit render after an onload callback</title>
     <script type="text/javascript">
       var onloadCallback = function() {
-        grecaptcha.render('captcha-box', {
-          'sitekey' : '6LewOwMTAAAAACMBjAR2W7zqwHsd7bTcJWQRGhue',
+        grecaptcha.render("captcha-box", {
+          sitekey : "<%= captchaSiteKey %>",
           callback: function(response) {
             document.getElementById("captcha-form").submit();
           }
@@ -16,6 +16,7 @@
   <body>
     <form id="captcha-form" action="/captcha-verify" method="GET">
       <div id="captcha-box"></div>
+      <input type="hidden" name="redirect-url" value="<%= redirectUrl %>"/>
     </form>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
   </body>
