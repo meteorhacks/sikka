@@ -14,6 +14,7 @@ Package.on_use(function (api, where) {
     'mongo',
     'underscore',
     'meteorhacks:meteorx@1.3.1',
+    'meteorhacks:picker@1.0.2',
     'chuangbo:cookie@1.1.0'
   ]);
 
@@ -21,7 +22,7 @@ Package.on_use(function (api, where) {
     'lib/server/config.js',
     'lib/server/core.js',
     'lib/server/session_hooks.js',
-    'lib/server/proxy_hooks.js'
+    'lib/server/routes.js'
   ], 'server');
 
   api.add_files([

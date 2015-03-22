@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <title>I am a Human</title>
     <script type="text/javascript">
       var onloadCallback = function() {
         grecaptcha.render("captcha-box", {
@@ -12,12 +12,34 @@
         });
       };
     </script>
+
+    <style type="text/css">
+      #message {
+        font-family: "Arial";
+        margin-top: 75px;
+        font-size: 18px;
+        line-height: 25px;
+        color: #565656;
+        text-align: center;
+      }
+
+      #captcha {
+        width: 300px;
+        margin: 30px auto;
+      }
+    </style>
   </head>
   <body>
-    <form id="captcha-form" action="/captcha-verify" method="GET">
-      <div id="captcha-box"></div>
-      <input type="hidden" name="redirect-url" value="<%= redirectUrl %>"/>
-    </form>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <div id="message">
+      We’ve detected some unusual traffic from your IP address.<br>
+      Help us to filter you from the rest.
+    </div>
+    <div id="captcha">
+      <form id="captcha-form" action="/verify-captcha" method="GET">
+        <div id="captcha-box"></div>
+        <input type="hidden" name="redirect-url" value="<%= redirectUrl %>"/>
+      </form>
+      <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    </div>
   </body>
 </html>
