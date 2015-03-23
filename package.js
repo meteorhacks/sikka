@@ -19,6 +19,7 @@ Package.onTest(function (api, where) {
   api.use('practicalmeteor:sinon');
 
   api.addFiles([
+    'test/server/utils.js',
     'test/server/config.js',
     'test/server/core.js',
     'test/server/session_hooks.js',
