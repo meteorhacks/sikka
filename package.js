@@ -8,7 +8,26 @@ Npm.depends({
   "cookies": "0.5.0"
 });
 
-Package.on_use(function (api, where) {
+Package.onUse(function (api, where) {
+  configure(api);
+  api.export('Firewall', 'server')
+});
+
+Package.onTest(function (api, where) {
+  configure(api);
+  api.use('tinytest');
+  api.use('practicalmeteor:sinon');
+
+  api.addFiles([
+    'test/server/utils.js',
+    'test/server/config.js',
+    'test/server/core.js',
+    'test/server/session_hooks.js',
+    'test/server/routes.js'
+  ], 'server');
+});
+
+function configure(api) {
   api.versionsFrom("METEOR@0.9.0");
   api.use([
     'mongo',
@@ -18,20 +37,19 @@ Package.on_use(function (api, where) {
     'chuangbo:cookie@1.1.0'
   ]);
 
-  api.add_files([
+  api.addFiles([
+    'lib/server/init.js',
     'lib/server/config.js',
     'lib/server/core.js',
     'lib/server/session_hooks.js',
     'lib/server/routes.js'
   ], 'server');
 
-  api.add_files([
+  api.addFiles([
     'lib/client/core.js'
   ], 'client');
 
-  api.add_files([
+  api.addFiles([
     'lib/server/captcha_page.html'
   ], 'server', {isAsset: true});
-
-  api.export('Firewall', 'server')
-});
+}
