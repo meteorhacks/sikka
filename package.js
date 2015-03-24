@@ -38,6 +38,7 @@ function configure(api) {
   ]);
 
   api.addFiles([
+    'lib/server/init.js',
     'lib/server/config.js',
     'lib/server/core.js',
     'lib/server/session_hooks.js',
