@@ -1,6 +1,8 @@
 Package.describe({
-  summary: 'Rate limiting for meteor',
-  name: "meteorhacks:firewall"
+  "summary": 'A Firewall for Meteor Apps',
+  "name": "meteorhacks:firewall",
+  "version": "1.0.0",
+  "git": "https://github.com/meteorhacks/firewall.git",
 });
 
 Npm.depends({
@@ -28,7 +30,7 @@ Package.onTest(function (api, where) {
 });
 
 function configure(api) {
-  api.versionsFrom("METEOR@0.9.0");
+  api.versionsFrom("METEOR@0.9.2");
   api.use([
     'mongo',
     'underscore',

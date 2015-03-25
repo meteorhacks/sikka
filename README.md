@@ -1,4 +1,4 @@
-# A Firewall for Meteor
+# A Firewall for Meteor Apps [![Build Status](https://travis-ci.org/meteorhacks/firewall.svg?branch=master)](https://travis-ci.org/meteorhacks/firewall)
 
 This is an application level firewall for Meteor. Firewall can detect malicious users of your app and block those users. 
 
