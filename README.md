@@ -45,6 +45,8 @@ Here are some parameters you can configure
 |Per Human Rate Limit (per sec) | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | IP Rate Limit |
 |Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
+Here is an exaple of a settings.json file:
+'code example
 > Visit [Google's Recaptcha](https://www.google.com/recaptcha/intro/index.html) website to get Captcha keys for your domain. We've added a default set of keys works on locally, meteor.com and onmodulus.net to make your development experience simpler. 
 > But, you should get a new pair of keys for a production deployment.
 
