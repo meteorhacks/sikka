@@ -47,12 +47,16 @@ Here are some parameters you can configure
 
 Here is an example of a settings.json file:
 
-`"sikka": {
-		"captcha": {
-			"siteKey": "your_new_site_key",
-			"secret": "your_new_secret_key"
-		}
-	}`
+```
+{
+    "sikka": {
+        "captcha": {
+            "siteKey": "your_new_site_key",
+            "secret": "your_new_secret_key"
+	}
+    }
+}
+```
 
 You can apply the settings with:
 
