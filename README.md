@@ -52,7 +52,7 @@ Here is an example of a settings.json file:
     "sikka": {
          "captcha": {
              "siteKey": "your_new_site_key",
-             "secret":  "your_new_secret_key"
+             "secret": "your_new_secret_key"
          }
     }
 }
