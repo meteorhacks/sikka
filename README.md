@@ -30,7 +30,7 @@ Here are some parameters you can configure.
 
 |Description       | Environment Variable    | Meteor.settings key | default |
 |------------------|-------------------------|---------------------------|---|
-|Per IP rate limit | `SIKKA_PER_IP_MAX_RPS` | `sikka.rateLimits.perIp` | 50|
+|Per IP rate limit | `SIKKA_PER_IP_MAX_RPS` | `sikka.rateLimits.perIp` | 20|
 |Time to block an IP | `SIKKA_BLOCK_IP_FOR_MILLIS` | `sikka.times.blockIpFor` | 120000|
 
 ### Human Verification (Captcha Support)
@@ -43,7 +43,7 @@ Here are some parameters you can configure
 |------------------|-------------------------|---------------------------|---|
 |Captcha Site Key | `SIKKA_CAPTCHA_SITE_KEY` | `sikka.captcha.siteKey` | |
 |Captcha Secret | `SIKKA_CAPTCHA_SECRET` | `sikka.captcha.secret` | |
-|Per Human Rate Limit | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | 20 |
+|Per Human Rate Limit | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | IP Rate Limit |
 |Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
 > Visit [Google's Recaptcha](https://www.google.com/recaptcha/intro/index.html) website to get Captcha keys for your domain. We've added a default set of keys works on locally, meteor.com and onmodulus.net to make your development experience simpler. 
