@@ -46,7 +46,19 @@ Here are some parameters you can configure
 |Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
 Here is an exaple of a settings.json file:
-'code example
+
+`"sikka": {
+		"captcha": {
+			"siteKey": "your_new_site_key",
+			"secret": "your_new_secret_key"
+		}
+	}`
+
+You can apply the settings with:
+
+` meteor --settings path/to/settings.json`
+
+
 > Visit [Google's Recaptcha](https://www.google.com/recaptcha/intro/index.html) website to get Captcha keys for your domain. We've added a default set of keys works on locally, meteor.com and onmodulus.net to make your development experience simpler. 
 > But, you should get a new pair of keys for a production deployment.
 
