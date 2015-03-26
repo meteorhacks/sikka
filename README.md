@@ -45,7 +45,7 @@ Here are some parameters you can configure
 |Per Human Rate Limit (per sec) | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | IP Rate Limit |
 |Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
-Here is an exaple of a settings.json file:
+Here is an example of a settings.json file:
 
 `"sikka": {
 		"captcha": {
