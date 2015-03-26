@@ -1,7 +1,6 @@
 # Sikka - A Firewall for Meteor Apps [![Build Status](https://travis-ci.org/meteorhacks/sikka.svg?branch=master)](https://travis-ci.org/meteorhacks/sikka)
 
 This is an application level firewall for Meteor. Sikka can detect malicious users of your app and block those users. 
-
 We've build **basic rate limiting** support and it is well tested and works with most of the Meteor deployments techniques. We also have a huge roadmap and a feature set.
 
 ![Sikka - A Firewall for Meteor](https://cldup.com/7LLtciFLqg.png)
