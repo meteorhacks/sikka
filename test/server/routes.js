@@ -6,15 +6,15 @@ Tinytest.add("routes - middlewares - when a valid human", function(test) {
   var req = buildRequest(null, humanToken);
 
   var next = sinon.stub();
-  var newFirewall = {
+  var newSikka = {
     _isValidHuman: sinon.stub()
   };
 
-  WithNew(Firewall, newFirewall, function() {
-    newFirewall._isValidHuman.onCall(0).returns(true);
-    Firewall.routes._validationMiddleware(req, null, next);
+  WithNew(Sikka, newSikka, function() {
+    newSikka._isValidHuman.onCall(0).returns(true);
+    Sikka.routes._validationMiddleware(req, null, next);
     test.equal(next.callCount, 1);
-    test.equal(newFirewall._isValidHuman.args[0], [humanToken]);
+    test.equal(newSikka._isValidHuman.args[0], [humanToken]);
   });
 });
 
@@ -23,7 +23,7 @@ Tinytest.add("routes - middlewares - /verify-captcha page", function(test) {
   req.url = "/verify-captcha?some=args";
 
   var next = sinon.stub();
-  Firewall.routes._validationMiddleware(req, null, next);
+  Sikka.routes._validationMiddleware(req, null, next);
   test.equal(next.callCount, 1);
 });
 
@@ -32,7 +32,7 @@ Tinytest.add("routes - middlewares - when only for humans (but not a human)", fu
     onlyForHumans: true
   };
 
-  var newFirewallRoutes = {
+  var newSikkaRoutes = {
     _sendCaptchPage: sinon.stub()
   };
 
@@ -40,13 +40,13 @@ Tinytest.add("routes - middlewares - when only for humans (but not a human)", fu
   req.url = "/";
 
   WithNew(Config, newConfig, function() {
-    WithNew(Firewall.routes, newFirewallRoutes, function() {
+    WithNew(Sikka.routes, newSikkaRoutes, function() {
       var dummyValue = Random.id();
-      newFirewallRoutes._sendCaptchPage.onCall(0).returns(dummyValue);
-      var result = Firewall.routes._validationMiddleware(req, null, null);
+      newSikkaRoutes._sendCaptchPage.onCall(0).returns(dummyValue);
+      var result = Sikka.routes._validationMiddleware(req, null, null);
 
       test.equal(result, dummyValue);
-      test.equal(newFirewallRoutes._sendCaptchPage.callCount, 1);
+      test.equal(newSikkaRoutes._sendCaptchPage.callCount, 1);
     });
   });
 });
@@ -57,17 +57,17 @@ Tinytest.add("routes - middlewares - when ip is not blocked", function(test) {
   req.url = "/";
 
   var next = sinon.stub();
-  var newFirewall = {
+  var newSikka = {
     _isBlocked: sinon.stub()
   };
 
   var next = sinon.stub();
 
-  WithNew(Firewall, newFirewall, function() {
-    newFirewall._isBlocked.onCall(0).returns(false);
-    Firewall.routes._validationMiddleware(req, null, next);
+  WithNew(Sikka, newSikka, function() {
+    newSikka._isBlocked.onCall(0).returns(false);
+    Sikka.routes._validationMiddleware(req, null, next);
     test.equal(next.callCount, 1);
-    test.equal(newFirewall._isBlocked.args[0], [ip]);
+    test.equal(newSikka._isBlocked.args[0], [ip]);
   });
 });
 
@@ -76,19 +76,19 @@ Tinytest.add("routes - middlewares - when ip not blocked", function(test) {
   var req = buildRequest(ip);
   req.url = "/";
 
-  var newFirewall = {
+  var newSikka = {
     _isBlocked: sinon.stub()
   };
-  var newFirewallRoutes = {
+  var newSikkaRoutes = {
     _sendCaptchPage: sinon.stub()
   };
 
-  WithNew(Firewall.routes, newFirewallRoutes, function() {
-    WithNew(Firewall, newFirewall, function() {
-      newFirewall._isBlocked.onCall(0).returns(true);
-      Firewall.routes._validationMiddleware(req, null);
-      test.equal(newFirewall._isBlocked.args[0], [ip]);
-      test.equal(newFirewallRoutes._sendCaptchPage.callCount, 1);
+  WithNew(Sikka.routes, newSikkaRoutes, function() {
+    WithNew(Sikka, newSikka, function() {
+      newSikka._isBlocked.onCall(0).returns(true);
+      Sikka.routes._validationMiddleware(req, null);
+      test.equal(newSikka._isBlocked.args[0], [ip]);
+      test.equal(newSikkaRoutes._sendCaptchPage.callCount, 1);
     });
   });
 });
@@ -100,7 +100,7 @@ Tinytest.add("routes - captcha page - render it", function(test) {
     end: sinon.stub()
   };
 
-  Firewall.routes._sendCaptchPage(req, res);
+  Sikka.routes._sendCaptchPage(req, res);
   test.equal(!!res.end.args[0][0].match(res.end), true);
   test.equal(res.writeHead.args[0], [200, {'Content-Type': 'html'}]);
 });
@@ -120,7 +120,7 @@ Tinytest.add("routes - process captcha - when request failed", function(test) {
 
   WithNew(request, newRequest, function() {
     newRequest.post.onCall(0).callsArgWith(2, new Error());
-    Firewall.routes._processCaptcha(req, res);
+    Sikka.routes._processCaptcha(req, res);
 
     test.equal(res.writeHead.args[0][0], 500);
     test.equal(res.end.callCount, 1);
@@ -145,19 +145,19 @@ Tinytest.add("routes - process captcha - when verification completed", function(
     post: sinon.stub()
   };
 
-  var newFirewallRoutes = {
-    _setFirewallHumanToken: sinon.stub()
+  var newSikkaRoutes = {
+    _setSikkaHumanToken: sinon.stub()
   };
 
-  WithNew(Firewall.routes, newFirewallRoutes, function() {
+  WithNew(Sikka.routes, newSikkaRoutes, function() {
     WithNew(request, newRequest, function() {
       var captchaVerification = {success: true};
       newRequest.post.onCall(0).callsArgWith(2, null, {}, JSON.stringify(captchaVerification));
-      Firewall.routes._processCaptcha(req, res);
+      Sikka.routes._processCaptcha(req, res);
 
       test.equal(res.writeHead.args[0], [301, {'Location': redirectUrl}]);
       test.equal(res.end.callCount, 1);
-      test.equal(newFirewallRoutes._setFirewallHumanToken.callCount, 1);
+      test.equal(newSikkaRoutes._setSikkaHumanToken.callCount, 1);
     });
   });
 });
@@ -182,18 +182,18 @@ Tinytest.add("routes - process captcha - when verification failed", function(tes
   WithNew(request, newRequest, function() {
     var captchaVerification = {success: false};
     newRequest.post.onCall(0).callsArgWith(2, null, {}, JSON.stringify(captchaVerification));
-    Firewall.routes._processCaptcha(req, res);
+    Sikka.routes._processCaptcha(req, res);
 
     test.equal(res.writeHead.args[0], [401]);
     test.equal(res.end.callCount, 1);
   });
 });
 
-Tinytest.add("routes - _setFirewallHumanToken", function(test) {
+Tinytest.add("routes - _setSikkaHumanToken", function(test) {
   var req = {};
   var res = {};
 
-  var newFirewall = {
+  var newSikka = {
     _addHumanFor: sinon.stub()
   };
 
@@ -202,13 +202,13 @@ Tinytest.add("routes - _setFirewallHumanToken", function(test) {
   };
 
   WithNew(Cookies.prototype, newCookiesProto, function() {
-    WithNew(Firewall, newFirewall, function() {
-      Firewall.routes._setFirewallHumanToken(req, res);
+    WithNew(Sikka, newSikka, function() {
+      Sikka.routes._setSikkaHumanToken(req, res);
 
-      var token = newFirewall._addHumanFor.args[0][0];
+      var token = newSikka._addHumanFor.args[0][0];
       test.equal(newCookiesProto.set.callCount, 1);
       test.equal(newCookiesProto.set.args[0], [
-        "firewall-human-token",
+        "sikka-human-token",
         token,
         {httpOnly: false}
       ]);
@@ -222,7 +222,7 @@ function buildRequest(ip, humanToken) {
 
   var req = {
     headers: {
-      'cookie': 'firewall-human-token=' + humanToken
+      'cookie': 'sikka-human-token=' + humanToken
     },
     socket: {
       remoteAddress: ip

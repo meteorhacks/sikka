@@ -1,20 +1,20 @@
-# A Firewall for Meteor Apps [![Build Status](https://travis-ci.org/meteorhacks/firewall.svg?branch=master)](https://travis-ci.org/meteorhacks/firewall)
+# Sikka - A Firewall for Meteor Apps [![Build Status](https://travis-ci.org/meteorhacks/sikka.svg?branch=master)](https://travis-ci.org/meteorhacks/sikka)
 
-This is an application level firewall for Meteor. Firewall can detect malicious users of your app and block those users. 
+This is an application level firewall for Meteor. Sikka can detect malicious users of your app and block those users. 
 
-But, we've build **basic rate limiting** support and it is well tested and works with most of the Meteor deployments techniques. We've huge roadmap and a feature set.
+We've build **basic rate limiting** support and it is well tested and works with most of the Meteor deployments techniques. We also have a huge roadmap and a feature set.
 
-![A Firewall for Meteor](https://cldup.com/7LLtciFLqg.png)
+![Sikka - A Firewall for Meteor](https://cldup.com/7LLtciFLqg.png)
 
 ## Installation
 
 ~~~
-meteor add meteorhacks:firewall
+meteor add meteorhacks:sikka
 ~~~
 
-Firewall comes with generic set of defaults works for a common Meteor app. But, it's better if you can tweak them for your needs. Refer following section for that.
+Sikka comes with sufficient set of defaults, which is okay for a common Meteor app. But, it's better if you can tweak them for your needs. Refer following section for that.
 
-> All the configurations are based on either env. variables or with Meteor.settings
+> All of the configurations are based on either environment variables or with Meteor.settings
 
 ## Supported Features
 
@@ -30,8 +30,8 @@ Here are some parameters you can configure.
 
 |Description       | Environment Variable    | Meteor.settings key | default |
 |------------------|-------------------------|---------------------------|---|
-|Per IP rate limit | `FIREWALL_PER_IP_MAX_RPS` | `firewall.rateLimits.perIp` | 50|
-|Time to block an IP | `FIREWALL_BLOCK_IP_FOR_MILLIS` | `firewall.times.blockIpFor` | 120000|
+|Per IP rate limit | `SIKKA_PER_IP_MAX_RPS` | `sikka.rateLimits.perIp` | 50|
+|Time to block an IP | `SIKKA_BLOCK_IP_FOR_MILLIS` | `sikka.times.blockIpFor` | 120000|
 
 ### Human Verification (Captcha Support)
 
@@ -41,10 +41,10 @@ Here are some parameters you can configure
 
 |Description       | Environment Variable    | Meteor.settings key | default |
 |------------------|-------------------------|---------------------------|---|
-|Captcha Site Key | `FIREWALL_CAPTCHA_SITE_KEY` | `firewall.captcha.siteKey` | |
-|Captcha Secret | `FIREWALL_CAPTCHA_SECRET` | `firewall.captcha.secret` | |
-|Per Human Rate Limit | `FIREWALL_PER_HUMAN_MAX_RPS` | `firewall.times.blockIpFor` | 20 |
-|Human Lifetime (expired after that) | `FIREWALL_HUMAN_LIVES_UPTO_MILLIS` | `firewall.times.humanLivesUpto` | 3600000 |
+|Captcha Site Key | `SIKKA_CAPTCHA_SITE_KEY` | `sikka.captcha.siteKey` | |
+|Captcha Secret | `SIKKA_CAPTCHA_SECRET` | `sikka.captcha.secret` | |
+|Per Human Rate Limit | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | 20 |
+|Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
 > Visit [Google's Recaptcha](https://www.google.com/recaptcha/intro/index.html) website to get Captcha keys for your domain. We've added a default set of keys works on locally, meteor.com and onmodulus.net to make your development experience simpler. 
 > But, you should get a new pair of keys for a production deployment.
@@ -53,14 +53,14 @@ Here are some parameters you can configure
 
 Let's say, your app is under an attack. So, you can make your app to reject all DDP requests and ask for human verification by default. This is how you can configure it.
 
-To enable this mode. Just export following env. variable or Meteor settings key.
+To enable this mode. Just export following environment variable or Meteor settings key.
 
-* Env. Variable: FIREWALL_ONLY_FOR_HUMANS
-* Meteor Settings key: firewall.onlyForHumans
+* Environment Variable: `SIKKA_ONLY_FOR_HUMANS`
+* Meteor Settings key: `sikka.onlyForHumans`
 
 ## Support Deployment Methods
 
-If your app behind a proxy or SSL terminator, it needs to add `x-forwarded-for` header with the actual IP address. 
+If your app behind a proxy or a SSL terminator, it needs to add `x-forwarded-for` header with the actual IP address. 
 
 ### Tested Proxies / SSL Terminators
 
@@ -72,4 +72,4 @@ If your app behind a proxy or SSL terminator, it needs to add `x-forwarded-for` 
 
 ### Failed Proxies / SSL Terminators
 
-* [x] Meteor Up's SSL terminator - Will have a fix soon.
+* [x] Meteor Up's SSL terminator - we'll have a fix soon.

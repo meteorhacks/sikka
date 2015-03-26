@@ -1,8 +1,8 @@
 Package.describe({
-  "summary": 'A Firewall for Meteor Apps',
-  "name": "meteorhacks:firewall",
+  "summary": 'Sikka - A Firewall for Meteor Apps',
+  "name": "meteorhacks:sikka",
   "version": "1.0.0",
-  "git": "https://github.com/meteorhacks/firewall.git",
+  "git": "https://github.com/meteorhacks/sikka.git",
 });
 
 Npm.depends({
@@ -12,7 +12,7 @@ Npm.depends({
 
 Package.onUse(function (api, where) {
   configure(api);
-  api.export('Firewall', 'server')
+  api.export('Sikka', 'server')
 });
 
 Package.onTest(function (api, where) {

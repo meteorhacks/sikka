@@ -10,12 +10,12 @@ Tinytest.add("session hooks - identifying a human", function(test) {
   var humanToken = Random.id();
   var msg = {
     msg: "method",
-    method: "setFirewallHumanToken",
+    method: "setSikkaHumanToken",
     params: [humanToken]
   };
 
   sessionProto.processMessage.call(context, msg);
-  test.equal(context._firewallHumanToken, humanToken);
+  test.equal(context._sikkaHumanToken, humanToken);
   test.equal(context.send.callCount, 2);
 });
 
@@ -31,7 +31,7 @@ Tinytest.add("session hooks - update stats", function(test) {
       remoteAddress: ip
     },
     id: sessionId,
-    _firewallHumanToken: humanToken
+    _sikkaHumanToken: humanToken
   };
 
   var msg = {
@@ -40,14 +40,14 @@ Tinytest.add("session hooks - update stats", function(test) {
     params: [10]
   };
 
-  var newFirewall = {
+  var newSikka = {
     _updateStats: sinon.stub()
   };
 
-  WithNew(Firewall, newFirewall, function() {
+  WithNew(Sikka, newSikka, function() {
     sessionProto.processMessage.call(context, msg);
-    test.equal(newFirewall._updateStats.callCount, 1);
-    test.equal(newFirewall._updateStats.args[0], [ip, sessionId, humanToken]);
+    test.equal(newSikka._updateStats.callCount, 1);
+    test.equal(newSikka._updateStats.args[0], [ip, sessionId, humanToken]);
   });
 });
 
@@ -66,12 +66,12 @@ Tinytest.add("session hooks - update stats and blocked", function(test) {
     params: [10]
   };
 
-  var newFirewall = {
+  var newSikka = {
     _updateStats: sinon.stub()
   };
 
-  WithNew(Firewall, newFirewall, function() {
-    newFirewall._updateStats.onCall(0).returns(true);
+  WithNew(Sikka, newSikka, function() {
+    newSikka._updateStats.onCall(0).returns(true);
     sessionProto.processMessage.call(context, msg);
     test.equal(context.send.callCount, 1);
     test.equal(context.socket.removeAllListeners.callCount, 1);
