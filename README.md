@@ -42,8 +42,8 @@ Here are some parameters you can configure
 |------------------|-------------------------|---------------------------|---|
 |Captcha Site Key | `SIKKA_CAPTCHA_SITE_KEY` | `sikka.captcha.siteKey` | |
 |Captcha Secret | `SIKKA_CAPTCHA_SECRET` | `sikka.captcha.secret` | |
-|Per Human Rate Limit (per sec) | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.times.blockIpFor` | IP Rate Limit |
-|Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
+|Per Human Rate Limit (per sec) | `SIKKA_PER_HUMAN_MAX_RPS` | `sikka.rateLimits.perHuman` | IP Rate Limit |
+|Millis Human Lifetime (expired after that) | `SIKKA_HUMAN_LIVES_UPTO_MILLIS` | `sikka.times.humanLivesUpto` | 3600000 |
 
 Here is an example of a settings.json file:
 
